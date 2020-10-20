@@ -7,3 +7,4 @@ export const GET_JADWAL_IBADAH = 'GET_JADWAL_IBADAH';
 export const GET_NAMA_SURAT = 'GET_NAMA_SURAT';
 export const GET_DOA_LIMIT = 'GET_DOA_LIMIT';
 export const GET_ALL_DOA = 'GET_ALL_DOA';
+export const GET_DETAIL_DOA = 'GET_DETAIL_DOA';

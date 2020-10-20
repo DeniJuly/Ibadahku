@@ -1,29 +1,45 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {connect} from 'react-redux';
 import {globalStyle} from '../../assets/styles/global';
+import {API} from '../../config/api';
+import {getDetailDoa} from '../../redux/_actions/doa';
 
-export default class DoaDetail extends Component {
+class DoaDetail extends Component {
     constructor() {
         super();
         this.state = {
             doa: {
-                arab:
-                    'اَللّٰهُمَّ بَارِكْ لَنَا فِيْمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ',
-                id: 1,
-                ilustrasi: 'doa-sebelum-makan.png',
-                indonesia:
-                    'Ya Allah, berkahilah kami dalam rezeki yang telah Engkau berikan kepada kami dan peliharalah kami dari siksa api neraka',
-                judul: 'Doa Sebelum Makan',
-                latin:
-                    "Alloohumma barik lanaa fiimaa razatanaa waqinaa 'adzaa bannar",
+                arab: '',
+                ilustrasi: '',
+                indonesia: '',
+                judul: '',
+                latin: '',
             },
         };
     }
     componentDidMount() {
-        this.props.navigation.setOptions({
-            title: this.state.doa.judul,
-        });
+        this.getData();
     }
+    getData = async () => {
+        const id = this.props.route.params.ID;
+        await this.props.getDetailDoa(id).then((res) => {
+            const doa = res.value;
+            this.setState({
+                doa: {
+                    id: doa.id,
+                    arab: doa.arab,
+                    ilustrasi: doa.ilustrasi,
+                    indonesia: doa.indonesia,
+                    judul: doa.judul,
+                    latin: doa.latin,
+                },
+            });
+            this.props.navigation.setOptions({
+                title: doa.judul,
+            });
+        });
+    };
     render() {
         return (
             <View style={globalStyle.page}>
@@ -33,12 +49,13 @@ export default class DoaDetail extends Component {
                         height: 200,
                     }}
                     source={{
-                        uri: `https://ramadhankuapi.iamdeni.com/img/surat/${this.state.doa.ilustrasi}`,
+                        uri: this.state.doa.ilustrasi,
                     }}
                 />
                 <View style={styles.content}>
                     <Text style={styles.ayat}>{this.state.doa.arab}</Text>
                     <Text style={styles.latin}>{this.state.doa.latin}</Text>
+                    <Text style={styles.latin}>{this.state.doa.indonesia}</Text>
                 </View>
             </View>
         );
@@ -56,5 +73,13 @@ const styles = StyleSheet.create({
     latin: {
         fontFamily: 'Poppins-Light',
         fontSize: 15,
+        marginBottom: 5,
     },
 });
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getDetailDoa: (id) => dispatch(getDetailDoa(id)),
+    };
+};
+export default connect(null, mapDispatchToProps)(DoaDetail);

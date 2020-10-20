@@ -1,6 +1,8 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
 import {globalStyle} from '../../assets/styles/global';
+import {getAllDoa} from '../../redux/_actions/doa';
 import CardDoa from './component/CardDoa';
 import Search from './component/Search';
 
@@ -9,40 +11,19 @@ class Doa extends React.Component {
         super();
         this.state = {
             search: '',
-            doa: [
-                {
-                    id: 1,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-                {
-                    id: 2,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-                {
-                    id: 3,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-                {
-                    id: 4,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-                {
-                    id: 5,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-                {
-                    id: 6,
-                    ilustrasi: 'doa-sebelum-makan.svg',
-                    judul: 'Doa Sebelum Makan',
-                },
-            ],
+            doa: [],
         };
     }
+    componentDidMount() {
+        this.getData();
+    }
+    getData = async () => {
+        await this.props.getAllDoa().then((res) => {
+            this.setState({
+                doa: res.value,
+            });
+        });
+    };
     handleChangeSearch = (key) => {
         console.log(key);
     };
@@ -78,4 +59,10 @@ const styles = StyleSheet.create({
         marginVertical: 15,
     },
 });
-export default Doa;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAllDoa: () => dispatch(getAllDoa()),
+    };
+};
+export default connect(null, mapDispatchToProps)(Doa);

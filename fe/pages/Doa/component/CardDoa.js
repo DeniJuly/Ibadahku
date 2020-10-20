@@ -8,7 +8,11 @@ import Next from '../../../assets/image/icons/next-grey-15.svg';
 const CardDoa = ({doa, navigation}) => {
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate('DoaDetail')}
+            onPress={() =>
+                navigation.navigate('DoaDetail', {
+                    ID: doa.id,
+                })
+            }
             key={doa.id}
             style={{
                 flexDirection: 'row',
