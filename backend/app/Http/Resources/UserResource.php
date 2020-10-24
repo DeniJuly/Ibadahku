@@ -12,7 +12,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'id_tinggal' => $this->id_tinggal,
             'id_quran' => $this->id_quran,
-            'foto_profile' => ($this->foto_profile == null ? asset('storage/img/default.png') : asset('storage/' . $this->foto_profile))
+            'foto_profile' => ($this->foto_profile == null ? asset('storage/default.png') : asset('storage/' . $this->foto_profile))
         ];
     }
 }
