@@ -99,6 +99,8 @@ class Home extends React.Component {
         });
     };
 
+    goDetailDoa = (id) => {};
+
     render() {
         const user = this.state;
         console.log(user.loading);
@@ -246,9 +248,7 @@ class Home extends React.Component {
                                     renderItem={({item, index}) => (
                                         <TouchableOpacity
                                             onPress={() =>
-                                                this.props.navigation.navigate(
-                                                    'DoaDetail',
-                                                )
+                                                this.goDetailDoa(item.id)
                                             }
                                             key={item.id.toString()}
                                             style={styles.doaItem}>

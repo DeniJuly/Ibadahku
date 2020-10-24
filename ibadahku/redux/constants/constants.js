@@ -11,3 +11,5 @@ export const GET_DETAIL_DOA = 'GET_DETAIL_DOA';
 export const GET_ALL_QURAN = 'GET_ALL_QURAN';
 export const GET_DETAIL_QURAN = 'GET_DETAIL_QURAN';
 export const UPDATE_LAST_QURAN = 'UPDATE_LAST_QURAN';
+export const GET_ALL_KOTA = 'GET_ALL_KOTA';
+export const EDIT_PROFILE = 'EDIT_PROFILE';

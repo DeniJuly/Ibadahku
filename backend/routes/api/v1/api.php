@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v1\DoaController;
 use App\Http\Controllers\Api\v1\IbadahController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------

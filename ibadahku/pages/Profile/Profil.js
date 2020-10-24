@@ -33,6 +33,9 @@ class Profil extends React.Component {
     componentDidMount() {
         this.getData();
     }
+    componentDidUpdate() {
+        console.log('UPDATE');
+    }
     getData = () => {
         this.props.getDetail().then((res) => {
             let response = res.value;
